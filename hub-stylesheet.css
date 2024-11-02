@@ -146,7 +146,7 @@ body {
     border: 1px solid #ccc;
     width: 100%;
     height: 100%;
-    display: inline-block;
+    display: block;
 }
 
 /* .secondary-hub-menu-tab-btn:hover + .secondary-tab-content,
