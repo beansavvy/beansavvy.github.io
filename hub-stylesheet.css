@@ -1,10 +1,10 @@
+body {
+    background-color: white;
+}
+
 .navbar-btn-container {
     width: 10%;
     text-align: center;
-}
-
-.navbar-btn {
-    
 }
 
 #navbar-home-icon:before {
@@ -16,30 +16,41 @@
 }
 
 #body-wrapper {
-    padding: 10px;
-    min-height: 1000px;
+    display: flex;
+    flex-direction: column;
+    height: 95vh;
+    width: 95vw;
+    margin: auto;
+    padding: 0;
+    gap: 20px;
 }
 
 #navbar-container {
     border: 1px solid black;
     width: 100%;
     min-width: 500px;
-    
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
 
 #hub-container {
     border: 1px solid blue;
     width: 100%;
+    min-width: 500px;
+    height: calc(90% - 20px);
+    overflow-y: auto;
+    display: flex;
 }
 
 .navbar-btn-dropdown {
-    float: left;
     position: relative;
     display: inline-block;
 }
 
 .dropdown-btn {
-    background-color: grey;
+    background-color: white;
     color: black;
     padding: 10px;
     font-size: 16px;
@@ -75,3 +86,70 @@
 #navbar-home {
     float: right;
 }
+
+#tabular-system {
+    display: inline-block;
+    position: relative;
+}
+
+.primary-hub-menu-tab {
+    position: relative;
+    width: 100px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.2);
+    border: 1px solid black;
+}
+
+.primary-hub-menu-tab-btn, .secondary-hub-menu-tab-btn, .tertiary-hub-menu-tab-btn {
+    width: 100%;
+    padding: 10px;
+    background-color: white;
+    border: 1px solid black;
+    color: black;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    box-shadow: inset 0 0 0 0 rgba(0, 0, 0, 0);
+    transition: box-shadow 0.3s ease;
+}
+
+.primary-hub-menu-tab-btn:hover, .secondary-hub-menu-tab-btn:hover, .tertiary-hub-menu-tab-btn:hover {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.active-tab {
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.inactive-tab {
+    box-shadow: inset 0 0 0 rgba(0, 0, 0, 0);
+}
+
+.primary-hub-menu-tab-content, .secondary-hub-menu-tab-content, .tertiary-hub-menu-tab-content {
+    display: none;
+    position: absolute;
+    left: 100%;
+    background-color: white;
+    border: 1px solid #ccc;
+    z-index: 1;
+}
+
+.primary-hub-menu-tab-content {
+    top: 0;
+}
+
+.secondary-hub-menu-tab-content, .tertiary-hub-menu-tab-content {
+    top: 0;
+}
+
+#content-display {
+    padding: 10px;
+    border: 1px solid #ccc;
+    width: 100%;
+    height: 100%;
+    display: inline-block;
+}
+
+/* .secondary-hub-menu-tab-btn:hover + .secondary-tab-content,
+.tertiary-hub-menu-tab-btn:hover + .tertiary-tab-content {
+    display: block;
+} */

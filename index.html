@@ -3,7 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="hub-stylesheet.css">
-        <script src="hub-scripts.js"></script>
+        <script src="node_modules/mathjs/dist/mathjs.min.js"></script>
         <title>beansavvy Github Pages Repo</title>
     </head>
 <body>
@@ -16,15 +16,50 @@
                 <a href="https://www.github.com">Github</a>
             </div>
         </div>
-        <div class="navbar-btn-container" id="navbar-home">
+        <div class="navbar-btn" id="navbar-home">
             <button>
                 <img id="navbar-home-icon" src="/hub-images/home-btn.png" alt=""/>
             </button>
         </div>
     </div>
     <div id="hub-container">
-
+        <div id="tabular-system">
+            <div class="primary-hub-menu-tab">
+                <button class="primary-hub-menu-tab-btn">Games</button>
+                <div class="primary-hub-menu-tab-content">
+                    <button class="secondary-hub-menu-tab-btn">World of Warcraft</button>
+                    <div class="secondary-hub-menu-tab-content">
+                        <button class="final-btn tertiary-hub-menu-tab-btn">Transmute AH Calculator</button>
+                        <div class="final-tab tertiary-hub-menu-tab-content">
+                            <!-- Input Section -->
+                            <div id="transmute-input-section">
+                                <label for="exported-ah-input">AH Exported String:</label>
+                                <input type="text" id="exported-ah-input" placeholder="Enter Exported AH String">
+                                <button class="calculate-btn" id="calculate-ah-prices-btn">Calculate</button>
+                            </div>
+                            <!-- Output Section -->
+                            <div id="transmute-output-section">
+                            </div>
+                        </div>
+                        <button class="final-btn tertiary-hub-menu-tab-btn">Useful Links</button>
+                        <div class="final-tab tertiary-hub-menu-tab-content">
+                            <!-- Content for Transmute AH Calculator goes here -->
+                            <p>Useful Links content...</p>
+                        </div>
+                    </div>
+                    <button class="final-btn secondary-hub-menu-tab-btn">Path of Exile</button>
+                    <div class="final-tab secondary-hub-menu-tab-content">
+                        <!-- Content for Path of Exile goes here -->
+                        <p>Path of Exile content...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="content-display">
+            Welcome to the beansavvy Github Pages hub!
+        </div>
     </div>
 </div>
+<script src="hub-scripts.js"></script>
 </body>
 </html>
