@@ -30,7 +30,7 @@ const popoutContent = {
                     <a href="/text-game/">Text RPG</a>
                 </td>
                 <td>
-                    <a href="https://github.com/beansavvy/text-game" target="_blank">
+                    <a href="https://github.com/beansavvy/text-rpg-game" target="_blank">
                         Repository
                     </a>
                 </td>
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function attachTableListeners(){
     const popoutTable = document.querySelector('.popout-content-table');
-    
+
     popoutTable.addEventListener('click', event => {
         if (event.target.closest('a')) return;
 
