@@ -2,16 +2,23 @@ body {
     margin: 0px;
 }
 
-.hori-buffer {
-    width: 20px;
+.b-top {
+    border-top: 1px solid grey
+}
+.b-right {
+    border-right: 1px solid grey;
+}
+.b-btm {
+    border-bottom: 1px solid grey;
+}
+.b-left {
+    border-left: 1px solid grey;
 }
 
-#navbar-home-icon:before {
-    content: "Home";
-}
-
-#navbar-home-icon:after {
-    content: "";
+#background-canvas{
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 #body-wrapper {
@@ -22,6 +29,22 @@ body {
     margin: auto;
     padding: 0;
     gap: 20px;
+}
+
+#body-wrapper{
+    /* display: none; */
+}
+
+.hori-buffer {
+    width: 20px;
+}
+
+#navbar-home-icon:before {
+    content: "Home";
+}
+
+#navbar-home-icon:after {
+    content: "";
 }
 
 #navbar-container {
@@ -137,12 +160,79 @@ body {
 }
 
 #content-display {
+    position: relative;
     padding: 10px;
     border: 1px solid #ccc;
     width: 90%;
     display: block;
-    box-shadow: 0px 0px 10px 0px black;
+    box-shadow: 5px 5px 5px 0px gray;
+    overflow: hidden;
 }
+
+.display-popout-container {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    background-color: white;
+    z-index: 10;
+
+    transform: scaleX(0);
+    /* transform: scaleX(1); */
+    transform-origin: left center;
+
+    transition: transform 0.4s ease;
+    display: hidden;
+    box-sizing: border-box;
+}
+
+.display-popout-container.popout-open {
+    display: block;
+    transform: scaleX(1);
+}
+
+.table-header {
+    width: 100%;
+    text-align: center;
+    border-bottom: 1px solid gray;
+}
+
+.popout-content-table {
+    border-collapse: collapse;
+    padding: 0px;
+    width: 100%;
+    table-layout: fixed;
+}
+
+.popout-content-table tr td {
+    text-align: center;
+}
+
+.application-row {
+    cursor: pointer;
+}
+
+.application-details {
+    display: none;
+}
+
+.application-details.open {
+    display: table-row;
+}
+
+.application-details-content {
+    padding: 15px 25px;
+    white-space: normal;
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+.application-row:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
 
 .default-display-wrapper {
     width: 75%;

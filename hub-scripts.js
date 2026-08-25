@@ -1,9 +1,127 @@
 let tabNames = ['primary-hub-menu-tab-content', 'secondary-hub-menu-tab-content', 'tertiary-hub-menu-tab-content'];
 let btnNames = ['primary-hub-menu-tab-btn', 'secondary-hub-menu-tab-btn', 'tertiary-hub-menu-tab-btn'];
 
+const backgroundCanvas = document.getElementById('background-canvas');
+const bgCtx = backgroundCanvas.getContext('2d');
+
+const popoutContent = {
+    games: `
+    <h1 class="table-header">Games</h1>
+    <table class="popout-content-table">
+        <colgroup>
+            <col style="width: 4%">
+            <col style="width: 32%">
+            <col style="width: 32%">
+            <col style="width: 32%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th class="b-btm"></th>
+                <th class="b-right b-btm">Application</th>
+                <th class="b-right b-btm">GitHub Repo</th>
+                <th class="b-btm">Status</th>
+            </tr>
+        </thead>
+    
+        <tbody>
+            <tr class="application-row">
+                <td class="expand-indicator">+</td>
+                <td>
+                    <a href="/text-game/">Text RPG</a>
+                </td>
+                <td>
+                    <a href="https://github.com/beansavvy/text-game" target="_blank">
+                        Repository
+                    </a>
+                </td>
+                <td>In Development</td>
+            </tr>
+    
+            <tr class="application-details">
+                <td colspan="4">
+                    <div class="application-details-content">
+                        <p>
+                            <strong>Description:</strong>
+                            A text-based RPG built using Next.js. Every time a new
+                            update is pushed to the Text RPG repo, a GitHub Action
+                            compiles the Next.js code into a static page and pushes
+                            it to the GitHub Pages repo.
+                        </p>
+    
+                        <p>
+                            <strong>Concepts:</strong>
+                            Next.js, React, TypeScript, Context API, GitHub Actions
+                        </p>
+    
+                        <p>
+                            <strong>Last Updated:</strong>
+                            August 2026
+                        </p>
+                    </div>
+                </td>
+            </tr>
+    
+            <tr class="application-row">
+                <td class="expand-indicator b-top">+</td>
+                <td class="b-top">
+                    <a href="/tic-tac-toe/">TicTacToe</a>
+                </td>
+                <td class="b-top">
+                    <a href="YOUR_REPO_URL" target="_blank">
+                        Repository
+                    </a>
+                </td>
+                <td class="b-top">Complete</td>
+            </tr>
+    
+            <tr class="application-details">
+                <td colspan="4">
+                    <div class="application-details-content">
+                        <p>
+                            <strong>Description:</strong>
+                            Simple TicTacToe game that contains three difficulties
+                            and stores wins and losses.
+                        </p>
+    
+                        <p>
+                            <strong>Concepts:</strong>
+                            JavaScript, DOM manipulation, Minimax, Alpha-Beta Pruning
+                        </p>
+    
+                        <p>
+                            <strong>Last Updated:</strong>
+                            August 2026
+                        </p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    `,
+
+    forms: `
+        <h2>Web Forms</h2>
+        <p>Form projects go here.</p>
+    `,
+
+    popups: `
+        <h2>Popups</h2>
+        <p>Popup examples go here.</p>
+    `,
+
+    specialEffects: `
+        <h2>Special Effects</h2>
+        <p>Special effect projects go here.</p>
+    `
+};
+
+
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
-    // Function to load content into a section
+    // createBackground();
+
     function loadContent(sectionId) {
         // console.log(sectionId);
         const section = document.getElementById('content-display');
@@ -23,6 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function toggleActiveTab(button, className) {
         if(button.classList.contains('active-tab')){
             button.classList.remove('active-tab');
+            toggleActiveTabPopout(button.value)
         }
         else{
             document.querySelectorAll(`.${className}`).forEach(btn => {
@@ -30,11 +149,21 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             button.classList.add('active-tab');
             button.classList.remove('inactive-tab');
+            toggleActiveTabPopout(button.value)
         }
     }
 
-    function togglePopout(value){
-        
+    function toggleActiveTabPopout(value){
+        const popoutDisplay = document.getElementById('display-popout-container');
+        if(popoutDisplay.classList.contains('popout-open')){
+            popoutDisplay.classList.remove('popout-open');
+            popoutDisplay.innerHTML = '';
+        }
+        else{
+            popoutDisplay.classList.add('popout-open');
+            popoutDisplay.innerHTML = popoutContent[value];
+            attachTableListeners();
+        }
     }
 
     function toggleDisplay(element) {
@@ -75,6 +204,175 @@ document.addEventListener('DOMContentLoaded', () => {
     
 });
 
-function fillBackground(){
+function attachTableListeners(){
+    const popoutTable = document.querySelector('.popout-content-table');
     
+    popoutTable.addEventListener('click', event => {
+        if (event.target.closest('a')) return;
+
+        const row = event.target.closest('.application-row');
+
+        if (!row) return;
+
+        const detailsRow = row.nextElementSibling;
+
+        if (detailsRow?.classList.contains('application-details')) {
+            // detailsRow.classList.toggle('open');
+            const isOpen = detailsRow.classList.toggle('open');
+
+            const indicator = row.querySelector('.expand-indicator');
+
+            if (indicator) {
+                indicator.innerHTML = isOpen ? '\-' : '+';
+            }
+        }
+
+        
+    });
 }
+
+
+
+const waves = [];
+const MAX_WAVES = 20;
+const sandParticles = [];
+
+
+function createBackground(){
+    
+    createSandTexture();
+    // fillBackground();
+    animateWaterHighlights();
+}
+
+function fillBackground() {
+    bgCtx.fillStyle = "#d9c29c";
+
+    bgCtx.fillRect(
+        0,
+        0,
+        backgroundCanvas.width,
+        backgroundCanvas.height
+    );
+
+    drawSandTexture();
+}
+
+function createSandTexture() {
+    const dotCount = Math.floor(
+        (backgroundCanvas.width * backgroundCanvas.height) / 1800
+    );
+
+    for (let i = 0; i < dotCount; i++) {
+        sandParticles.push({
+            x: Math.random() * backgroundCanvas.width,
+            y: Math.random() * backgroundCanvas.height,
+            radius: 0.5 + Math.random() * 1.5
+        });
+    }
+}
+
+function drawSandTexture() {
+    const dotColors = [
+        "#c8ad7f",
+        "#b8996b",
+        "#e8d3aa",
+        "#a9875b"
+    ];
+
+    sandParticles.forEach((particle, index) => {
+        bgCtx.beginPath();
+
+        bgCtx.arc(
+            particle.x,
+            particle.y,
+            particle.radius,
+            0,
+            Math.PI * 2
+        );
+
+        bgCtx.fillStyle = dotColors[index % dotColors.length];
+        bgCtx.fill();
+    });
+}
+
+function animateWaterHighlights() {
+    fillBackground();
+
+    if (waves.length < MAX_WAVES && Math.random() < 0.03) {
+        createWave();
+    }
+
+    waves.forEach(wave => {
+        updateWave(wave);
+        drawWave(wave);
+    });
+
+    removeExpiredWaves();
+
+    requestAnimationFrame(animateWaterHighlights);
+}
+
+function createWave() {
+    const width = 80 + Math.random() * 180;
+
+    waves.push({
+        x: Math.random() * backgroundCanvas.width,
+        y: -20,
+
+        width: width,
+        height: 5 + Math.random() * 10,
+
+        speed: 0.15 + Math.random() * 0.35,
+
+        phase: Math.random() * Math.PI * 2,
+        morphSpeed: 0.01 + Math.random() * 0.02,
+
+        morphAmount: 5 + Math.random() * 10
+    });
+}
+
+function updateWave(wave) {
+    wave.y += wave.speed;
+
+    wave.phase += wave.morphSpeed;
+}
+
+function drawWave(wave) {
+    const morph = Math.sin(wave.phase) * wave.morphAmount;
+
+    const leftX = wave.x - wave.width / 2;
+    const rightX = wave.x + wave.width / 2;
+
+    bgCtx.beginPath();
+
+    bgCtx.moveTo(leftX, wave.y);
+
+    bgCtx.quadraticCurveTo(
+        wave.x,
+        wave.y - wave.height + morph,
+        rightX,
+        wave.y
+    );
+
+    bgCtx.quadraticCurveTo(
+        wave.x,
+        wave.y + wave.height - morph,
+        leftX,
+        wave.y
+    );
+
+    bgCtx.strokeStyle = "rgba(255, 255, 255, 0.15)";
+    bgCtx.lineWidth = 2;
+
+    bgCtx.stroke();
+}
+
+function removeExpiredWaves() {
+    for (let i = waves.length - 1; i >= 0; i--) {
+        if (waves[i].y > backgroundCanvas.height + 50) {
+            waves.splice(i, 1);
+        }
+    }
+}
+
