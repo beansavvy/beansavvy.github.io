@@ -1,10 +1,9 @@
 body {
-    background-color: white;
+    margin: 0px;
 }
 
-.navbar-btn-container {
-    width: 10%;
-    text-align: center;
+.hori-buffer {
+    width: 20px;
 }
 
 #navbar-home-icon:before {
@@ -19,27 +18,29 @@ body {
     display: flex;
     flex-direction: column;
     height: 95vh;
-    width: 95vw;
+    width: 100%;
     margin: auto;
     padding: 0;
     gap: 20px;
 }
 
 #navbar-container {
-    border: 1px solid black;
+    border-bottom: 1px solid black;
+    box-shadow: 0px 1px 5px 0px black;
     width: 100%;
     min-width: 500px;
-    height: 10%;
+    height: 40px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    /* justify-content: space-around; */
 }
 
 #hub-container {
     /* border: 1px solid blue; */
-    width: 100%;
+    /* width: 100%; */
     min-width: 500px;
     height: calc(90% - 20px);
+    padding: 10px;
     overflow-y: auto;
     display: flex;
 }
@@ -47,6 +48,11 @@ body {
 .navbar-btn-dropdown {
     position: relative;
     display: inline-block;
+    min-width: fit-content;
+}
+
+#navbar-container .navbar-btn-dropdown:not(:has(~ .navbar-btn-dropdown)) .dropdown-btn {
+    border-left: 1px solid black;
 }
 
 .dropdown-btn {
@@ -56,15 +62,24 @@ body {
     font-size: 16px;
     border: none;
     cursor: pointer;
+    border-right: 1px solid gray
 }
 
 .dropdown-content {
     display: none;
     position: absolute;
-    background-color: grey;
-    min-width: 160px;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    padding: 0px;
+    margin: 0px;
+    width: 100%;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-    z-index: 1;
+    z-index: 1000;
+}
+
+.vertical-dropdown-subbtn{
+    border: 1px solid lightgrey;
 }
 
 .dropdown-content a {
@@ -112,7 +127,7 @@ body {
     transition: box-shadow 0.3s ease;
 }
 
-.primary-hub-menu-tab-btn:hover{
+.custom-btn:hover{
     box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -124,8 +139,9 @@ body {
 #content-display {
     padding: 10px;
     border: 1px solid #ccc;
-    width: 100%;
+    width: 90%;
     display: block;
+    box-shadow: 0px 0px 10px 0px black;
 }
 
 .default-display-wrapper {

@@ -16,8 +16,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.primary-hub-menu-tab-btn').forEach(button => {
         button.addEventListener('click', () => {
             toggleActiveTab(button, 'primary-hub-menu-tab-btn');
+            togglePopout(button.value);
         });
     });
+
+    function toggleActiveTab(button, className) {
+        if(button.classList.contains('active-tab')){
+            button.classList.remove('active-tab');
+        }
+        else{
+            document.querySelectorAll(`.${className}`).forEach(btn => {
+                btn.classList.remove('active-tab');
+            });
+            button.classList.add('active-tab');
+            button.classList.remove('inactive-tab');
+        }
+    }
+
+    function togglePopout(value){
+        
+    }
 
     function toggleDisplay(element) {
         // console.log("TOGGLE DISPLAY");
@@ -54,19 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
         content.style.top = `${buttonRect.top - parentRect.top -2}px`;
     }
 
-    function toggleActiveTab(button, className) {
-        if(button.classList.contains('active-tab')){
-            button.classList.remove('active-tab');
-            
-        }
-        else{
-            document.querySelectorAll(`.${className}`).forEach(btn => {
-                btn.classList.remove('active-tab');
-            });
-            button.classList.add('active-tab');
-            button.classList.remove('inactive-tab');
-        }
-    }
+    
 });
 
-
+function fillBackground(){
+    
+}

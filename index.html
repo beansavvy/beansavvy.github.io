@@ -10,29 +10,35 @@
 <body>
 <div id="body-wrapper">
     <div id="navbar-container">
+        <div class="hori-buffer"></div>
         <div class="navbar-btn-dropdown">
-            <button class="dropdown-btn">Media Links</button>
+            <div class="custom-btn dropdown-btn">Media Links</div>
             <div class="dropdown-content">
-                <a href="https://www.linkedin.com/in/ben-savage-4b2b05252/">LinkedIn</a>
-                <a href="https://www.github.com">Github</a>
+                <a class="custom-btn vertical-dropdown-subbtn" href="https://www.linkedin.com/in/ben-savage-4b2b05252/">LinkedIn</a>
+                <a class="custom-btn vertical-dropdown-subbtn" href="https://github.com/beansavvy/">Github</a>
             </div>
         </div>
-        <div class="navbar-btn" id="navbar-home">
-            <button>
+        <div style="width: 100%"></div>
+        <div class="navbar-btn-dropdown" id="navbar-home">
+            <button class="custom-btn dropdown-btn">
                 <img id="navbar-home-icon" src="/hub-images/home-btn.png" alt=""/>
             </button>
         </div>
+        <div class="hori-buffer"></div>
     </div>
     <div id="hub-container">
         <div id="tabular-system">
             <div class="primary-hub-menu-tab">
-                <button class="primary-hub-menu-tab-btn">Games</button>
-                <button class="primary-hub-menu-tab-btn">Web Forms</button>
-                <button class="primary-hub-menu-tab-btn">Popups</button>
-                <button class="primary-hub-menu-tab-btn">Special Effects</button>
+                <button class="custom-btn primary-hub-menu-tab-btn" value="games">Games</button>
+                <button class="custom-btn primary-hub-menu-tab-btn" value="forms">Web Forms</button>
+                <button class="custom-btn primary-hub-menu-tab-btn" value="popups">Popups</button>
+                <button class="custom-btn primary-hub-menu-tab-btn" value="special-effects">Special Effects</button>
             </div>
         </div>
         <div id="content-display">
+            <div class="display-popout-wrapper">
+
+            </div>
             <div class="default-display-wrapper">
                 Welcome to the beansavvy Github Pages portfolio! <br><br>
                 This portfolio contains a collection of web-based components and applications I have made, 
