@@ -39,13 +39,13 @@ body {
     width: 20px;
 }
 
-#navbar-home-icon:before {
+/* #navbar-home-icon:before {
     content: "Home";
 }
 
 #navbar-home-icon:after {
     content: "";
-}
+} */
 
 #navbar-container {
     border-bottom: 1px solid black;
