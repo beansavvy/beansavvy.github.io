@@ -1,9 +1,6 @@
 let tabNames = ['primary-hub-menu-tab-content', 'secondary-hub-menu-tab-content', 'tertiary-hub-menu-tab-content'];
 let btnNames = ['primary-hub-menu-tab-btn', 'secondary-hub-menu-tab-btn', 'tertiary-hub-menu-tab-btn'];
 
-const backgroundCanvas = document.getElementById('background-canvas');
-const bgCtx = backgroundCanvas.getContext('2d');
-
 const popoutContent = {
     games: `
     <h1 class="table-header">Games</h1>
@@ -116,8 +113,6 @@ const popoutContent = {
 };
 
 
-
-
 document.addEventListener('DOMContentLoaded', () => {
 
     // createBackground();
@@ -134,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.primary-hub-menu-tab-btn').forEach(button => {
         button.addEventListener('click', () => {
             toggleActiveTab(button, 'primary-hub-menu-tab-btn');
-            togglePopout(button.value);
         });
     });
 
@@ -158,8 +152,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if(popoutDisplay.classList.contains('popout-open')){
             popoutDisplay.classList.remove('popout-open');
             
-            await.delay(500);
-            popoutDisplay.innerHTML = '';
+            setTimeout(() => {
+                popoutDisplay.innerHTML = '';
+            }, 500);
+            
         }
         else{
             popoutDisplay.classList.add('popout-open');

@@ -184,7 +184,7 @@ body {
     transform-origin: left center;
 
     transition: transform 0.4s ease;
-    /* display: hidden; */
+    display: hidden;
     box-sizing: border-box;
 }
 
