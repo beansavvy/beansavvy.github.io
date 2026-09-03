@@ -1,0 +1,20 @@
+[
+  {
+    "id": "text-rpg-game",
+    "name": "Text RPG",
+    "type": "game",
+    "status": "In Development",
+    "description": "A text-based RPG built using Next.js. Every time a new update is pushed to the Text RPG repo, a GitHub Action compiles the Next.js code into a static page and pushes it to the GitHub Pages repo.",
+    "concepts": [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Context API"
+    ],
+    "repository": "https://github.com/beansavvy/text-rpg-game",
+    "application": "/games/text-rpg-game/",
+    "hidden": false,
+    "lastUpdated": "2026-09-03T17:10:14.243Z",
+    "commit": "a353cf2e29211826bb922eb1bf36259dc93fd15f"
+  }
+]
