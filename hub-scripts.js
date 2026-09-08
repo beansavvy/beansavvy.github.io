@@ -306,10 +306,12 @@ function getPopoutContent(section) {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
 
     try {
+        console.log("loading projects");
         await loadProjects();
+        console.log("projects loaded");
     }
     catch (error) {
         console.error(
@@ -322,6 +324,7 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener('click', () => {
             toggleActiveTab(button, 'primary-hub-menu-tab-btn');
         });
+        console.log("TEST BTN CLICK");
     });
 
     function toggleActiveTab(button, className) {
@@ -335,25 +338,44 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             button.classList.add('active-tab');
             button.classList.remove('inactive-tab');
-            toggleActiveTabPopout(button.value)
+            toggleActiveTabPopout(button.value, true);
         }
     }
 
-    function toggleActiveTabPopout(value){
-        const popoutDisplay = document.getElementById('display-popout-container');
-        if(popoutDisplay.classList.contains('popout-open')){
-            popoutDisplay.classList.remove('popout-open');
-            
+    function toggleActiveTabPopout(value, shouldOpen) {
+        const popoutDisplay = document.getElementById(
+            'display-popout-container'
+        );
+        if (!popoutDisplay) {
+            alert("Failed to get tab content.");
+            return;
+        }
+
+        if (!shouldOpen) {
+
+            popoutDisplay.classList.remove(
+                'popout-open'
+            );
+
             setTimeout(() => {
-                popoutDisplay.innerHTML = '';
+                if (
+                    !popoutDisplay.classList.contains(
+                        'popout-open'
+                    )
+                ) {
+                    popoutDisplay.innerHTML = '';
+                }
             }, 500);
-            
+            return;
         }
-        else{
-            popoutDisplay.classList.add('popout-open');
-            popoutDisplay.innerHTML = popoutContent[value];
-            attachTableListeners();
-        }
+        popoutDisplay.innerHTML =
+            getPopoutContent(value);
+
+        popoutDisplay.classList.add(
+            'popout-open'
+        );
+
+        attachTableListeners();
     }
 
     function closeAllContent() {
